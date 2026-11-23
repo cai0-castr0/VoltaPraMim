@@ -3,7 +3,10 @@
 <footer class="site-footer">
     <div class="container footer-inner">
         <p>Protótipo acadêmico · UCSal</p>
-        <a href="<c:url value='/design-system' />">Design System</a>
+        <div style="display: flex; gap: 1rem;">
+            <a href="<c:url value='/operacoes' />">Operações</a>
+            <a href="<c:url value='/design-system' />">Design System</a>
+        </div>
     </div>
 </footer>
 </body>

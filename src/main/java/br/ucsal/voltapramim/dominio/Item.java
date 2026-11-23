@@ -65,7 +65,9 @@ public final class Item {
     }
 
     public void associarFoto(String fotoId) {
-        if (!categoria.aceitaFoto()) throw new IllegalArgumentException("Documentos não podem ter foto.");
+        if (!categoria.aceitaFoto()) {
+            throw new IllegalArgumentException("Documentos não podem ter foto.");
+        }
         this.fotoId = Objects.requireNonNull(fotoId);
     }
 
@@ -79,6 +81,14 @@ public final class Item {
 
     public boolean isVisivelNaBusca() {
         return estado.visivelNaBusca();
+    }
+
+    public boolean isDisponivelParaRetirada() {
+        return estado.disponivelParaRetirada();
+    }
+
+    public SituacaoItem getSituacao() {
+        return estado.situacao();
     }
 
     public boolean temFoto() {

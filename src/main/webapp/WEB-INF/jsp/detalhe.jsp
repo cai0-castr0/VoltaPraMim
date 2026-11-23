@@ -20,6 +20,17 @@
         <div><dt>Referência</dt><dd><c:out value="${item.referenciaPublica}" /></dd></div>
         <div><dt>Status</dt><dd><c:out value="${item.estadoRotulo}" /></dd></div>
     </dl>
-    <p class="notice">Este protótipo não confirma a posse nem informa local de retirada. A referência serve apenas para localizar o registro.</p>
+    <c:choose>
+        <c:when test="${item.disponivelParaRetirada}">
+            <p class="notice">
+                <strong>Disponível para retirada (simulação acadêmica):</strong> procure o atendimento da Sala de Operações informando a referência <strong><c:out value="${item.referenciaPublica}" /></strong> e descreva características não publicadas do objeto para comprovar a posse.
+            </p>
+        </c:when>
+        <c:otherwise>
+            <p class="notice">
+                Este objeto ainda está aguardando entrega à Sala de Operações e não está disponível para retirada imediata. A referência serve apenas para localizar o registro.
+            </p>
+        </c:otherwise>
+    </c:choose>
 </article>
 <%@ include file="rodape.jspf" %>

@@ -1,6 +1,8 @@
 package br.ucsal.voltapramim.web;
 
+import br.ucsal.voltapramim.aplicacao.ItemNaoEncontradoException;
 import br.ucsal.voltapramim.config.AppBootstrap;
+import br.ucsal.voltapramim.dominio.TransicaoInvalidaException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
@@ -67,6 +69,16 @@ public final class FrontControllerServlet extends HttpServlet {
 
         try {
             comando.executar(request, response);
+        } catch (ItemNaoEncontradoException erro) {
+            response.sendError(
+                    HttpServletResponse.SC_NOT_FOUND,
+                    erro.getMessage()
+            );
+        } catch (TransicaoInvalidaException erro) {
+            response.sendError(
+                    HttpServletResponse.SC_CONFLICT,
+                    erro.getMessage()
+            );
         } catch (IllegalArgumentException erro) {
             response.sendError(
                     HttpServletResponse.SC_BAD_REQUEST,

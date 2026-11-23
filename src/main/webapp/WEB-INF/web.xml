@@ -4,6 +4,14 @@
          xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
          version="6.0">
     <display-name>VoltaPraMim</display-name>
+
+    <session-config>
+        <session-timeout>30</session-timeout>
+        <cookie-config>
+            <http-only>true</http-only>
+        </cookie-config>
+    </session-config>
+
     <filter>
         <filter-name>utf8Filter</filter-name>
         <filter-class>br.ucsal.voltapramim.web.filtro.Utf8Filter</filter-class>
@@ -12,9 +20,31 @@
         <filter-name>utf8Filter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>
+
+    <filter>
+        <filter-name>autenticacaoOperacoesFilter</filter-name>
+        <filter-class>br.ucsal.voltapramim.web.filtro.AutenticacaoOperacoesFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>autenticacaoOperacoesFilter</filter-name>
+        <url-pattern>/operacoes</url-pattern>
+        <url-pattern>/operacoes/*</url-pattern>
+    </filter-mapping>
+
+    <filter>
+        <filter-name>csrfOperacoesFilter</filter-name>
+        <filter-class>br.ucsal.voltapramim.web.filtro.CsrfOperacoesFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>csrfOperacoesFilter</filter-name>
+        <url-pattern>/operacoes</url-pattern>
+        <url-pattern>/operacoes/*</url-pattern>
+    </filter-mapping>
+
     <listener>
         <listener-class>br.ucsal.voltapramim.config.AppBootstrap</listener-class>
     </listener>
+
     <servlet>
         <servlet-name>frontController</servlet-name>
         <servlet-class>br.ucsal.voltapramim.web.FrontControllerServlet</servlet-class>
@@ -33,6 +63,8 @@
         <url-pattern>/itens/*</url-pattern>
         <url-pattern>/fotos/*</url-pattern>
         <url-pattern>/design-system</url-pattern>
+        <url-pattern>/operacoes</url-pattern>
+        <url-pattern>/operacoes/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>default</servlet-name>
